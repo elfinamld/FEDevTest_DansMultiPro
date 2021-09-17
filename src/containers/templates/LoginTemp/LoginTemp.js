@@ -2,7 +2,7 @@ import React, {createRef} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Text, View} from 'react-native';
 import {Button} from 'react-native-paper';
-import InputText from '../../../components/molecules/InputText/InputText';
+import InputText from '../../../components/molecules/input/InputText';
 import styles from './styles';
 
 const LoginTemp = ({onSubmit}) => {

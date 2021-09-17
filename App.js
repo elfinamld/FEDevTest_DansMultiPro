@@ -6,9 +6,11 @@
  * @flow strict-local
  */
 import React, {Component} from 'react';
-import {Text} from 'react-native';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+import {persistor, store} from './src/config/redux/store';
 import NavigatorApp from './src/config/routes';
 
 const theme = {
@@ -33,9 +35,13 @@ class App extends Component {
 class Main extends Component {
   render() {
     return (
-      <PaperProvider theme={theme}>
-        <App />
-      </PaperProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <PaperProvider theme={theme}>
+            <App />
+          </PaperProvider>
+        </PersistGate>
+      </Provider>
     );
   }
 }
