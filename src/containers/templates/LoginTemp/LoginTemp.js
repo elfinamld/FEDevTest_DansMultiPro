@@ -24,12 +24,10 @@ const LoginTemp = ({onSubmit}) => {
     handleSubmit,
     formState: {errors},
   } = useForm();
-  let inputRef = {};
 
   return (
     <View>
       {formData.map((el, id) => {
-        inputRef[el.name] = createRef();
         return (
           <View>
             <Controller
@@ -42,7 +40,6 @@ const LoginTemp = ({onSubmit}) => {
               }}
               render={({field: {onChange, onBlur, value}}) => (
                 <InputText
-                  ref={inputRef[el.name]}
                   value={value}
                   style={{marginTop: 10}}
                   label={el.label}
