@@ -1,6 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Switch, Text, View} from 'react-native';
-import {Button, Card} from 'react-native-paper';
+import {Switch, Text, TouchableOpacity, View} from 'react-native';
+import {Card} from 'react-native-paper';
 import InputText from '../../input/InputText';
 
 const CardSwitch = ({value, onValueChange, onChange, onPress}) => {
@@ -27,20 +28,18 @@ const CardSwitch = ({value, onValueChange, onChange, onPress}) => {
         <InputText style={{width: 200}} onChangeText={onChange} />
       </View>
       <View style={{alignItems: 'flex-end'}}>
-        <Button
-          onPres={onPress}
-          labelStyle={{
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-            color: 'white',
-          }}
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPres={() => onPress('text')}
           style={{
             marginTop: 20,
+            paddingVertical: 15,
+            paddingHorizontal: 20,
             borderRadius: 8,
             backgroundColor: 'orange',
           }}>
-          Apply Filter
-        </Button>
+          <Text style={{color: 'white'}}>Apply Filter</Text>
+        </TouchableOpacity>
       </View>
     </Card>
   );

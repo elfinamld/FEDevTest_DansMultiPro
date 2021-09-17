@@ -2,12 +2,16 @@
 import React from 'react';
 import {View} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Entypo';
 import InputText from '../InputText';
 
 const SearchBar = ({onChange, onPress}) => {
   return (
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+      }}>
       <InputText style={{flex: 1}} onChangeText={onChange} adorStart />
       <TouchableRipple
         centered
@@ -17,9 +21,11 @@ const SearchBar = ({onChange, onPress}) => {
           width: 40,
           alignItems: 'center',
           justifyContent: 'center',
+          marginTop: 20,
+          borderRadius: 40 / 2,
         }}
         onPress={onPress}>
-        <Icon name={'arrow-drop-down'} size={20} />
+        <Icon name={'chevron-down'} size={20} />
       </TouchableRipple>
     </View>
   );

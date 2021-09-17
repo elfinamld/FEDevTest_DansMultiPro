@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import * as Components from '../../molecules/card';
 
@@ -21,9 +21,15 @@ const ScrollVertical = ({
   render,
   contentContainerStyle,
   data,
+  loadMore,
   itemProps,
   ...other
 }) => {
+  let onScroll = useRef();
+  useEffect(() => {
+    // if (typeof initFunc === 'function') initFunc();
+    onScroll.current = false;
+  }, []);
   const renderItem = others => _renderCard({component, itemProps, ...others});
 
   return (
@@ -36,6 +42,16 @@ const ScrollVertical = ({
       data={data}
       showsVerticalScrollIndicator={false}
       legacyImplementation={false}
+      onMomentumScrollEnd={() => {
+        if (onScroll.current === true) {
+          console.log('masuk sini');
+          // loadMore();
+        }
+        onScroll.current = false;
+      }}
+      onEndReached={() => {
+        onScroll.current = true;
+      }}
       {...other}
     />
   );

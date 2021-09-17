@@ -21,7 +21,6 @@ const InputText = ({
           {
             borderColor: 'black',
             borderWidth: 1,
-            marginTop: 3,
             overflow: 'hidden',
             height: 45,
             flexDirection: 'row',

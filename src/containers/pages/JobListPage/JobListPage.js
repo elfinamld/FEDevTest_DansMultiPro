@@ -4,8 +4,8 @@ import {View} from 'react-native';
 import {connect} from 'react-redux';
 import JobList from '../../../components/organisms/JobList';
 import {fetch_list_job} from '../../../config/redux/action/job';
-import {ListData} from '../../../config/redux/url/ListData';
 import {screens} from '../../../config/routes/listScreens';
+import styles from './styles';
 class JobListPage extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +25,11 @@ class JobListPage extends Component {
 
   render() {
     const {navigation} = this.props;
-    console.log('list', ListData);
+
     return (
-      <View style={{flex: 1, backgroundColor: 'white', paddingHorizontal: 15}}>
+      <View style={styles.wrapper}>
         <JobList
-          handleNext={id => navigation.navigate(screens.job_detail, {id})}
+          handleNext={item => navigation.navigate(screens.job_detail, {item})}
         />
       </View>
     );

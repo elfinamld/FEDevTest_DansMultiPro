@@ -1,12 +1,23 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import React, {Component} from 'react';
+import {ScrollView} from 'react-native';
+import JobDetail from '../../../components/organisms/JobDetail/JobDetail';
 
-const JobDetailPage = () => {
-  return (
-    <View>
-      <Text> Job Detail Page </Text>
-    </View>
-  );
-};
+class JobDetailPage extends Component {
+  render() {
+    const {route} = this.props;
+    console.log(route);
+    return (
+      <ScrollView
+        style={{
+          flex: 1,
+          backgroundColor: 'white',
+          padding: 15,
+        }}>
+        <JobDetail item={route.params} />
+      </ScrollView>
+    );
+  }
+}
 
 export default JobDetailPage;

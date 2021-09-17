@@ -1,47 +1,65 @@
 import React, {useState} from 'react';
+import {View} from 'react-native';
 import {ListData} from '../../../config/redux/url/ListData';
-import SearchBar from '../../molecules/input/SearchBar';
 import {CardSwitch} from '../../molecules/card';
+import SearchBar from '../../molecules/input/SearchBar';
 import ScrollVertical from '../ScrollVertical';
-import {screens} from '../../../config/routes/listScreens';
 
 const JobList = ({handleNext}) => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const [searchLoc, setSearchLoc] = useState('');
   const [value, setValue] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [page, setPage] = useState(1);
+  const perpage = ListData.slice(0, 10);
+
+  let dataCurrent = perpage;
 
   const filterList = ListData => {
+    console.log(value && searchLoc !== '');
     return ListData.filter(listItem =>
       value
         ? (listItem.company.toLowerCase().includes(search.toLowerCase()) ||
             listItem.title.toLowerCase().includes(search.toLowerCase())) &&
-          listItem.type.toLowerCase().includes(search.toLowerCase())
+          listItem.type
         : listItem.company.toLowerCase().includes(search.toLowerCase()) ||
           listItem.title.toLowerCase().includes(search.toLowerCase()) ||
-          listItem.type.toLowerCase().includes(search.toLowerCase()),
+          listItem.type,
     );
   };
-  // const handleNext = id => {
-  //   const {navigation} = props;
-  //   navigation.push(screens.job_detail, {id});
-  // };
 
-  console.log(filterList);
+  const handleFilter = data => {
+    console.log('masuk', data);
+  };
+
+  console.log(dataCurrent, page);
   return (
-    <>
+    <View>
       <SearchBar
-        onPress={() => setOpen(!open)}
+        onPress={() => {
+          setOpen(!open);
+        }}
         onChange={search => setSearch(search)}
       />
       {open ? (
-        <CardSwitch value={value} onValueChange={() => setValue(!value)} />
+        <CardSwitch
+          value={value}
+          onValueChange={() => setValue(!value)}
+          onChange={searchLoc => setSearchLoc(searchLoc)}
+          onPress={handleFilter}
+        />
       ) : null}
       <ScrollVertical
         data={filterList(ListData)}
         component={'CardJob'}
+        style={{marginTop: 20, marginBottom: 100}}
+        contentContainerStyle={{
+          marginBottom: 20,
+        }}
         itemProps={{onPress: handleNext}}
       />
-    </>
+    </View>
   );
 };
 
